@@ -348,7 +348,7 @@ body{
 .testimonial_v1 .testimonial_box .testimonial_img{
 	position: relative;
 	width: 38%;
-	background: url(../images/client_bg.jpg)no-repeat center;
+	/*background: url(../images/client_bg.jpg)no-repeat center;*/
 	background-size: cover;
 	z-index: 1;
 }
@@ -447,7 +447,7 @@ body{
 	transition: all .5s;
 }
 .featured_v1 .domar_box:hover{
-	background: url(../images/featured_bg.jpg) no-repeat center;
+	/*background: url(../images/featured_bg.jpg) no-repeat center;*/
 	background-size: cover;
 }
 .featured_v1 .domar_box:hover:after{
@@ -1105,7 +1105,8 @@ body{
 	border: none;
 }
 .single_course_wrapper .discription_tab .nav-tabs .nav-link.active{
-	text-decoration: line-through;
+	text-decoration: underline;
+    text-underline-offset: 10px;
 }
 .single_course_wrapper .discription_tab .nav-tabs .nav-link,
 .single_course_wrapper .discription_tab .nav-tabs .nav-link.active{
