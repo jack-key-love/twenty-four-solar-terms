@@ -1,8 +1,8 @@
 (function($) {
-  'use strict';  
+  'use strict';
     /*---------------------------------
         Preloader JS
-    -----------------------------------*/ 
+    -----------------------------------*/
     var prealoaderOption = $(window);
     prealoaderOption.on("load", function () {
         var preloader = jQuery('.spinner');
@@ -14,21 +14,21 @@
         Preloader JS
     -----------------------------------*/
 
-    /*---------------------------------  
+    /*---------------------------------
         sticky header JS
     -----------------------------------*/
-    $(window).on('scroll',function() {    
+    $(window).on('scroll',function() {
         var scroll = $(window).scrollTop();
          if (scroll < 106) {
           $(".header_area").removeClass("sticky");
          }else{
           $(".header_area").addClass("sticky");
          }
-    }); 
-    /*---------------------------------  
+    });
+    /*---------------------------------
         sticky header JS
     -----------------------------------*/
-    /*---------------------------------  
+    /*---------------------------------
         Search JS
     -----------------------------------*/
     // 确保所有页面都有搜索框结构
@@ -45,7 +45,7 @@
         '</form>' +
         '</div>' +
         '</div>';
-      
+
       $('body').append(searchHtml);
     }
 
@@ -104,8 +104,25 @@
         // 找到匹配的节气，跳转到对应页面
         window.location.href = solarTermsMap[query];
       } else {
-        // 未找到匹配的节气，清空输入框
-        alert("未找到该节气页面");
+        // 未找到匹配的节气，显示自定义弹窗并清空输入框
+        var msg = "未找到该节气页面";
+        var existingAlert = $("#custom_alert");
+        if (existingAlert.length === 0) {
+          let alertHtml = '<div id="custom_alert" role="alert" aria-live="assertive" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:9999;display:none;padding:12px 18px;background:rgba(0,0,0,0.85);color:#fff;border-radius:8px;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,0.3);">';
+          alertHtml += '<span class="custom_alert_msg">'+ msg +'</span>';
+          alertHtml += '<button type="button" id="custom_alert_close" aria-label="关闭提示" style="margin-left:12px;background:transparent;border:none;color:#fff;font-weight:700;cursor:pointer;font-size:18px;line-height:1;">×</button>';
+          alertHtml += '</div>';
+          $('body').append(alertHtml);
+          $(document).on('click', '#custom_alert_close', function() {
+            $('#custom_alert').fadeOut(200);
+          });
+        } else {
+          existingAlert.find('.custom_alert_msg').text(msg);
+          if (!existingAlert.find('#custom_alert_close').length) {
+            existingAlert.append('<button type="button" id="custom_alert_close" aria-label="关闭提示" style="margin-left:12px;background:transparent;border:none;color:#fff;font-weight:700;cursor:pointer;font-size:18px;line-height:1;">×</button>');
+          }
+        }
+        existingAlert.stop(true, true).fadeIn(200).delay(2500).fadeOut(300);
         $("#search_input").val("");
       }
     });
@@ -113,7 +130,7 @@
     // 点击搜索区域外部关闭搜索框
     $(document).on('click', function(e) {
       var searchWrapper = $(".search_wrapper");
-      if (searchWrapper.hasClass("active") && 
+      if (searchWrapper.hasClass("active") &&
           !$(e.target).closest('.search_wrapper, .search_btn, .search > a').length) {
         searchWrapper.removeClass("active");
       }
@@ -133,7 +150,7 @@
       $(".sidenav_menu").toggleClass("active");
     });
     $.sidebarMenu($('.sidebar-menu'))
-    /*---------------------- 
+    /*----------------------
         Scroll top js
     ------------------------*/
     $(window).on('scroll', function() {
@@ -149,10 +166,10 @@
         }, 600);
         return false;
     });
-    /*---------------------- 
+    /*----------------------
         Scroll top js
     ------------------------*/
-    /*---------------------- 
+    /*----------------------
         slider js
     ------------------------*/
     $('.testimonial_slide_1').slick({
@@ -187,10 +204,10 @@
         slidesToShow: 1,
         slidesToScroll: 1
     });
-    /*---------------------- 
+    /*----------------------
         slider js
-    ------------------------*/  
-    /*---------------------- 
+    ------------------------*/
+    /*----------------------
         magnific-Popup js
     ----------------------*/
     $('.play_btn').magnificPopup({
@@ -198,7 +215,7 @@
         removalDelay: 300,
         mainClass: 'mfp-fade'
     });
-    /*---------------------- 
+    /*----------------------
         magnific-Popup js
     ----------------------*/
     /*----------------------
@@ -212,7 +229,7 @@
     /*----------------------
         Countdown Timer js
     ----------------------*/
-    if($('.offer_countdown').length){  
+    if($('.offer_countdown').length){
       $('.offer_countdown').each(function() {
       var $this = $(this), finalDate = $(this).data('countdown');
       $this.countdown(finalDate, function(event) {
@@ -220,5 +237,5 @@
       });
      });
     }
-    
+
 })(window.jQuery);
