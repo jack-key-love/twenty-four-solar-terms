@@ -146,60 +146,105 @@ body{
 	End Default css
 ------------------------------------<*/
 
-/*>----------------------------------
-	Start Search Wrapper css
-------------------------------------*/
+/*-------------------------------------*
+	SEARCH WRAPPER
+\*-------------------------------------*/
 .search_wrapper.active{
-	top: 0;
+	opacity: 1;
+	visibility: visible;
 }
 .search_wrapper{
 	position: fixed;
-	top: -100%;
-    left: 0;
-	background-color: #001e3c;
-    height: 50%;
-    width: 100%;
-    z-index: 999999;
-  	-webkit-transition: all 0.6s ease-out 0s;
-  	-moz-transition: all 0.6s ease-out 0s;
-  	-ms-transition: all 0.6s ease-out 0s;
-  	-o-transition: all 0.6s ease-out 0s;
-  	transition: all 0.6s ease-out 0s;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 9999;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .search_wrapper .close_link{
 	position: absolute;
-	top: 0;
-	right: 0;
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
-	background: #10bb99;
-	border: none;
-	color: #fff;
-	text-align: center;
-	font-size: 22px;
+	right: 40px;
+	top: 40px;
+	color: #ffffff;
+	font-size: 24px;
+	cursor: pointer;
+	-webkit-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.search_wrapper .close_link:hover{
+	color: #ff6b6b;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+.search_wrapper .search_content {
+	width: 100%;
+	max-width: 600px;
+	padding: 0 15px;
+}
+.search_wrapper .search_form {
+	position: relative;
+	max-width: 500px;
+	margin: 0 auto;
 }
 .search_wrapper .form_control{
-	background: transparent;
-	width: 70%;
-	position: absolute;
-	top: 50%;
-	left: 15%;
+	width: 100%;
 	height: 60px;
-	padding-left: 30px;
-	margin: 0 auto;
-	color: #fff;
+	background-color: #ffffff;
 	border: none;
-	border-bottom: 1px solid #fff;
-	transition: all .5s;
+	padding: 0 30px;
+	font-size: 16px;
+	color: #333333;
+	outline: none;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	-ms-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	-o-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 .search_wrapper .form_control:focus{
-	border-color: #10bb99;
+	-webkit-box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+	-moz-box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+	-ms-box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+	-o-box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+	box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
 }
 .search_wrapper .form_control::placeholder{
-	color: #fff;
-	letter-spacing: 2px;
-	text-transform: capitalize;
+	color: #999999;
+}
+.search_wrapper .submit_btn {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: #ff6b6b;
+	color: #ffffff;
+	border: none;
+	width: 40px;
+	height: 40px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+.search_wrapper .submit_btn:hover {
+	background-color: #ff5252;
 }
 /*>----------------------------------
 	End Search Wrapper css

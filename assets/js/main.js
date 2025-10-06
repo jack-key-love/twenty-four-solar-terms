@@ -31,9 +31,99 @@
     /*---------------------------------  
         Search JS
     -----------------------------------*/
-    $(".search_btn,.close_link").on('click', function(e) {
+    // 确保所有页面都有搜索框结构
+    if ($(".search_wrapper").length === 0) {
+      // 动态创建搜索框结构
+      var searchHtml = '<div class="search_wrapper">' +
+        '<div class="search_content">' +
+        '<a href="#" class="close_link"><i class="fas fa-times"></i></a>' +
+        '<form id="search_form" class="search_form">' +
+        '<div class="form-group mb-0">' +
+        '<input type="text" id="search_input" class="form_control" placeholder="输入节气名称，如：立春" required>' +
+        '<button type="submit" class="submit_btn"><i class="fas fa-search"></i></button>' +
+        '</div>' +
+        '</form>' +
+        '</div>' +
+        '</div>';
+      
+      $('body').append(searchHtml);
+    }
+
+    // 处理搜索按钮点击事件 - 兼容不同页面的按钮类名
+    $(document).on('click', '.search_btn, .search > a, .close_link', function(e) {
       e.preventDefault();
       $(".search_wrapper").toggleClass("active");
+      // 当搜索框打开时，自动聚焦到输入框
+      if ($(".search_wrapper").hasClass("active")) {
+        setTimeout(function() {
+          $("#search_input").focus();
+        }, 300);
+      }
+    });
+
+    // 节气页面映射
+    var solarTermsMap = {
+      "立春": "lichun.html",
+      "雨水": "yushui.html",
+      "惊蛰": "jingzhe.html",
+      "春分": "chunfen.html",
+      "清明": "qingming.html",
+      "谷雨": "guyu.html",
+      "立夏": "lixia.html",
+      "小满": "xiaoman.html",
+      "芒种": "mangzhong.html",
+      "夏至": "xiazhi.html",
+      "小暑": "xiaoshu.html",
+      "大暑": "dashu.html",
+      "立秋": "liqiu.html",
+      "处暑": "chushu.html",
+      "白露": "bailu.html",
+      "秋分": "qiufen.html",
+      "寒露": "hanlu.html",
+      "霜降": "shuangjiang.html",
+      "立冬": "lidong.html",
+      "小雪": "xiaoxue.html",
+      "大雪": "daxue.html",
+      "冬至": "dongzhi.html",
+      "小寒": "xiaohan.html",
+      "大寒": "dahan.html",
+      "除夕": "chunjie.html",
+      "春节": "chunjie.html",
+      "元宵节": "chunjie.html",
+      "端午节": "chunjie.html",
+      "七夕节": "chunjie.html",
+      "中秋节": "chunjie.html",
+      "重阳节": "chunjie.html"
+    };
+
+    // 搜索表单提交事件
+    $(document).on('submit', "#search_form", function(e) {
+      e.preventDefault();
+      var query = $("#search_input").val().trim();
+      if (query && solarTermsMap[query]) {
+        // 找到匹配的节气，跳转到对应页面
+        window.location.href = solarTermsMap[query];
+      } else {
+        // 未找到匹配的节气，清空输入框
+        alert("未找到该节气页面");
+        $("#search_input").val("");
+      }
+    });
+
+    // 点击搜索区域外部关闭搜索框
+    $(document).on('click', function(e) {
+      var searchWrapper = $(".search_wrapper");
+      if (searchWrapper.hasClass("active") && 
+          !$(e.target).closest('.search_wrapper, .search_btn, .search > a').length) {
+        searchWrapper.removeClass("active");
+      }
+    });
+
+    // 处理ESC键关闭搜索框
+    $(document).on('keydown', function(e) {
+      if (e.key === "Escape" && $(".search_wrapper").hasClass("active")) {
+        $(".search_wrapper").removeClass("active");
+      }
     });
     /*---------------------
         Sidebar-menu js
@@ -131,4 +221,4 @@
      });
     }
     
-})(window.jQuery);   
+})(window.jQuery);
