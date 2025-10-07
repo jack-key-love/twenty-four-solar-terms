@@ -142,6 +142,19 @@
         $(".search_wrapper").removeClass("active");
       }
     });
+
+    // 将所有tags_box下的链接href指向百度百科
+    $(function() {
+        $('.tags_box').find('a').each(function() {
+            var text = $(this).text().trim().replaceAll('\#', ''); // 获取链接文本并去除#
+            if (text) {
+                // 编码处理，防止特殊字符导致URL错误
+                var url = 'https://baike.baidu.com/item/' + encodeURIComponent(text);
+                $(this).attr('href', url).attr('target', '_blank');
+            }
+        });
+    });
+
     /*---------------------
         Sidebar-menu js
     -----------------------*/
